@@ -2,8 +2,6 @@
 Prevents you from picking up items until you press the P key. You can set your key in ImGui settings.
 This mod has been tested in multiplayer, ping matters a big when pressing the key but it works.
 
----
-
 ## Installation Instructions
 
 [Installation FAQ](https://return-of-modding.github.io/ModdingWiki/Playing/Getting-Started/)
