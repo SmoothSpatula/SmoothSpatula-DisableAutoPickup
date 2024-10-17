@@ -1,4 +1,5 @@
-
+-- DisableAutoPickup v1.0.0
+-- SmoothSpatula
 
 mods["RoRRModdingToolkit-RoRR_Modding_Toolkit"].auto()
 
