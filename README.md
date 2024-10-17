@@ -13,6 +13,7 @@ This mod has been tested in multiplayer, ping matters a big when pressing the ke
 
 ## Special Thanks To
 * infectedanimal_7070 for the idea
+* kris for testing with us
 * The Return Of Modding team and discord server
 
 ## Contact
