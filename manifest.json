@@ -1,0 +1,11 @@
+{
+	"name": "Press2Pickup",
+	"version_number": "1.0.0",
+	"website_url": "https://github.com/SmoothSpatula/SmoothSpatula-Press2Pickup",
+	"description": "Prevents you from picking up items untill you press a key. You can change the key in ImGui settings.",
+	"dependencies": [
+		"ReturnOfModding-ReturnOfModding-1.0.32",
+    		"RoRRModdingToolkit-RoRR_Modding_Toolkit-1.1.16",
+    		"SmoothSpatula-TomlHelper-1.0.1"
+	]
+}
