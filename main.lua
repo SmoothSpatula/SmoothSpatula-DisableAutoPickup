@@ -1,7 +1,7 @@
 -- DisableAutoPickup v1.0.0
 -- SmoothSpatula
 
-mods["RoRRModdingToolkit-RoRR_Modding_Toolkit"].auto()
+mods["RoRRModdingToolkit-RoRR_Modding_Toolkit"].auto(true)
 
 local params = {
     pickup_key = 80
