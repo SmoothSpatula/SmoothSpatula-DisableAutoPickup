@@ -27,9 +27,9 @@ function init()
         end
         if gm._mod_net_isHost() then -- send back to all clients
             local msg_back = packetUpdatePickup:message_begin()
-            msg:write_uint(m_id) -- could replace with instance
-            msg:write_uint(value)
-            msg:send_to_all()
+            msg_back:write_uint(m_id) -- could replace with instance
+            msg_back:write_uint(value)
+            msg_back:send_to_all()
         end 
     end)
 
@@ -80,7 +80,5 @@ function init()
         end
     end)
 end
-
-Initialize(init)
 
 Initialize(init)
