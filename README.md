@@ -1,6 +1,6 @@
 # DisableAutoPickup
 Prevents you from picking up items until you press the P key. You can set your key in ImGui settings.
-This mod has been tested in multiplayer, ping matters a big when pressing the key but it works.
+This mod has been tested in multiplayer, ping matters a bit when pressing the key but it works.
 
 ## Installation Instructions
 
@@ -12,6 +12,7 @@ This mod has been tested in multiplayer, ping matters a big when pressing the ke
 ## Special Thanks To
 * infectedanimal_7070 for the idea
 * kris for testing with us
+* l/ght stops dripping on the discord for reporting bugs and testing
 * The Return Of Modding team and discord server
 
 ## Contact
