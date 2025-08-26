@@ -1,11 +1,12 @@
--- DisableAutoPickup v1.0.1
+-- DisableAutoPickup v1.0.3
 -- SmoothSpatula
 
 mods["RoRRModdingToolkit-RoRR_Modding_Toolkit"].auto(true)
 mods["SmoothSpatula-TomlHelper"].auto()
 
 local params = {
-    pickup_key = 80
+    pickup_key = 80,
+    --autopickup_disabled = true
 }
 
 params = Toml.config_update(_ENV["!guid"], params)
@@ -20,17 +21,20 @@ function init()
     packetUpdatePickup:onReceived(function(msg)
         local m_id = msg:read_uint()
         local value = msg:read_uint()
-        if value == 1 then
-            players_pickup[m_id] = true
-        else
-            players_pickup[m_id] = false
+        local player = Player.get_client()
+        if player.m_id ~= m_id then -- do not update self, could cause desync
+            if value == 1 then
+                players_pickup[m_id] = true
+            else
+                players_pickup[m_id] = false
+            end
+            if gm._mod_net_isHost() then -- send back to all clients
+                local msg_back = packetUpdatePickup:message_begin()
+                msg_back:write_uint(m_id) -- could replace with instance
+                msg_back:write_uint(value)
+                msg_back:send_to_all()
+            end
         end
-        if gm._mod_net_isHost() then -- send back to all clients
-            local msg_back = packetUpdatePickup:message_begin()
-            msg_back:write_uint(m_id) -- could replace with instance
-            msg_back:write_uint(value)
-            msg_back:send_to_all()
-        end 
     end)
 
 	gui.add_to_menu_bar(function()
@@ -40,6 +44,16 @@ function init()
             Toml.save_cfg(_ENV["!guid"], params)
         end
     end)
+
+    -- maybe add this with logic so people can have autopickup on or off in same party (too lazy to make it right now and might break things)
+
+    -- gui.add_to_menu_bar(function()
+    --     local new_value, clicked = ImGui.Checkbox("Disable AutoPickup", params['autopickup_disabled'])
+    --     if clicked then
+    --         params['autopickup_disabledd'] = new_value
+    --         Toml.save_cfg(_ENV["!guid"], params)
+    --     end
+    -- end)
 
     gm.pre_script_hook(gm.constants.__lf_pPickup_step_collide_item, function(self, other, result, args)
         if (not players_pickup[args[2].value.m_id]) and args[1].value.tier ~= Item.TIER.equipment then return false end
@@ -70,7 +84,7 @@ function init()
                 local msg = packetUpdatePickup:message_begin()
                 
                 msg:write_uint(player.m_id) -- could replace with instance
-                msg:write_uint(1) -- if the target is invalid, the wurm is inferred to not be firing
+                msg:write_uint(value) -- if the target is invalid, the wurm is inferred to not be firing
                 if gm._mod_net_isHost() then
                     msg:send_to_all()
                 else
